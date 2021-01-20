@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  api_gateway:
+    image: 'repo:5000/api_gateway:v1'
+    ports:
+      - '8000:8000'
+    networks:
+      - justdance
+    env_file:
+      - ./env/api_gateway.env
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - 'node.labels.id==mf'
+
+  song_collection:
+    image: 'repo:5000/song_collection:v1'
+    ports:
+      - '8001:8001'
+    networks:
+      - justdance
+    env_file:
+      - ./env/song_collection.env
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+      placement:
+        max_replicas_per_node: 1
+        constraints:
+          - 'node.labels.deployable==true'
+
+  streamer_api:
+    image: 'repo:5000/streamer_api:v1'
+    ports:
+      - '8002:8002'
+    networks:
+      - justdance
+    env_file:
+      - ./env/streamer_api.env
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+      placement:
+        max_replicas_per_node: 1
+        constraints:
+          - 'node.labels.deployable==true'
+
+  twitch_auth:
+    image: 'repo:5000/twitch_auth:v1'
+    ports:
+      - '8003:8003'
+    networks:
+      - justdance
+    env_file:
+      - ./env/twitch_auth.env
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+      placement:
+        max_replicas_per_node: 1
+        constraints:
+          - 'node.labels.deployable==true'
+
+  twitch_bot:
+    image: 'repo:5000/twitch_bot:v1'
+    ports:
+      - '8004:8004'
+    networks:
+      - justdance
+    env_file:
+      - ./env/twitch_bot.env
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+      placement:
+        max_replicas_per_node: 1
+        constraints:
+          - 'node.labels.deployable==true'
+
+networks:
+  justdance:
+    external: true

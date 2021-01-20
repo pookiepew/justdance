@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  api_gateway:
+    build: ./API_Gateway
+    ports:
+      - '8000:8000'
+    networks:
+      - justdance
+    volumes:
+      - ./API_Gateway:/app
+      - /app/node_modules
+    env_file:
+      - ./env/api_gateway.env
+
+  song_collection:
+    build: ./SongCollection
+    ports:
+      - '8001:8001'
+    networks:
+      - justdance
+    volumes:
+      - ./SongCollection:/app
+      - /app/node_modules
+    env_file:
+      - ./env/song_collection.env
+
+  streamer_api:
+    build: ./StreamerAPI
+    ports:
+      - '8002:8002'
+    networks:
+      - justdance
+    volumes:
+      - ./StreamerAPI:/app
+      - /app/node_modules
+    env_file:
+      - ./env/streamer_api.env
+
+  twitch_auth:
+    build: ./TwitchAuth
+    ports:
+      - '8003:8003'
+    networks:
+      - justdance
+    volumes:
+      - ./TwitchAuth:/app
+      - /app/node_modules
+    env_file:
+      - ./env/twitch_auth.env
+
+  twitch_bot:
+    build: ./TwitchBot
+    ports:
+      - '8004:8004'
+    networks:
+      - justdance
+    volumes:
+      - ./TwitchBot:/app
+      - /app/node_modules
+    env_file:
+      - ./env/twitch_bot.env
+
+networks:
+  justdance:
+    external: true
