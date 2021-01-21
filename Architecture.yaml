@@ -2,15 +2,9 @@ API_Gateway:
   - Contact point for client
   - Contacts microservices and feeds client
 
-TwitchAuth:
-  - API to communicate with Twitch
-  - Responsible for getting access_token and refresh_token
-  - Route to get user info based on user_id (twitch id)
-
-TwitchBot:
-  - TMI.js client - connects with twitch
-  - Reacting to chat events
-  - Sending twitch messages
+MongoDB:
+  - Hold connection to DB
+  - Save, Find, Update, Delete etc..
 
 SongCollection: (name??)
   - Responsible for querying DB for songs & return data
@@ -24,3 +18,13 @@ StreamerAPI:
   - .findOne()
   - .findAll()
   - .save()
+
+TwitchAuth:
+  - API to communicate with Twitch
+  - Responsible for getting access_token and refresh_token
+  - Route to get user info based on user_id (twitch id)
+
+TwitchBot:
+  - TMI.js client - connects with twitch
+  - Reacting to chat events
+  - Sending twitch messages

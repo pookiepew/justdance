@@ -82,13 +82,13 @@ services:
       - ./env/twitch_bot.env
     deploy:
       mode: replicated
-      replicas: 4
+      replicas: 1
       restart_policy:
         condition: on-failure
       placement:
         max_replicas_per_node: 1
         constraints:
-          - 'node.labels.deployable==true'
+          - 'node.labels.id==mf'
 
 networks:
   justdance:

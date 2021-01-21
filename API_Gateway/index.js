@@ -2,12 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const volleyball = require('volleyball');
 const helmet = require('helmet');
+const websocket = require('./websockets/twitchBot');
 
 const HttpError = require('./utils/http-error');
 
-const config = require('./util/config');
+const config = require('./utils/config');
 
 const app = express();
+
 app.use(cors());
 app.use(volleyball);
 app.use(helmet());
@@ -32,4 +34,17 @@ const port = config.PORT || 8000;
 
 const server = app.listen(port, async () => {
   console.log(`http://${config.HOST}:` + server.address().port);
+
+  const io = require('socket.io')(server);
+  const botSocket = require('socket.io')(server, { path: '/bot' });
+
+  io.on('connection', socket => {
+    console.log('path: /', socket.id);
+    websocket.listen(socket);
+  });
+
+  botSocket.on('connection', socket => {
+    console.log('Client connected botSocket - ID: ', socket.id);
+    websocket.listen(socket);
+  });
 });
