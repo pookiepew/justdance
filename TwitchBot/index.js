@@ -1,19 +1,16 @@
 const io = require('socket.io-client');
 
-const socket = io('ws://localhost:8000', { path: '/bot' });
+const connection = require('./socket');
+
+const socket = io('ws://api_gateway:8000', { path: '/bot' });
 
 socket.on('connect', () => {
   console.log('socket.io connected');
 });
 
-let startTime;
+connection.ping(socket);
 
-setInterval(function () {
-  startTime = Date.now();
-  socket.emit('ping');
-}, 5000);
-
-socket.on('pong', () => {
-  latency = Date.now() - startTime;
-  console.log('Websocket ping ' + latency + ' ms');
+socket.on('disconnect', () => {
+  socket.removeAllListeners();
+  console.log('Websocket disconnected!');
 });

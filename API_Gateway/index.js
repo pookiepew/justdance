@@ -17,6 +17,8 @@ app.use(express.json());
 
 app.use('/', require('./routes/index'));
 
+app.use('/twitch', require('./routes/twitchAuth'));
+
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);
   throw error;
@@ -39,12 +41,16 @@ const server = app.listen(port, async () => {
   const botSocket = require('socket.io')(server, { path: '/bot' });
 
   io.on('connection', socket => {
-    console.log('path: /', socket.id);
+    console.log(
+      socket.handshake.auth.client,
+      'service connected. ID:',
+      socket.id
+    );
     websocket.listen(socket);
   });
 
   botSocket.on('connection', socket => {
-    console.log('Client connected botSocket - ID: ', socket.id);
+    console.log('twitchBot service connected. ID:', socket.id);
     websocket.listen(socket);
   });
 });

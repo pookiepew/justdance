@@ -3,6 +3,8 @@ const cors = require('cors');
 const volleyball = require('volleyball');
 const helmet = require('helmet');
 
+const websocket = require('./controllers/websocket');
+
 const HttpError = require('./utils/http-error');
 
 const config = require('./utils/config');
@@ -26,11 +28,15 @@ app.use((error, req, res, next) => {
     return next(error);
   }
   res.status(error.code || 500);
-  res.json({ message: error.message || 'An unknown error occurred!' });
+  res.json({
+    message: error.message || 'An unknown error occurred!',
+    code: error.code || 500
+  });
 });
 
 const port = config.PORT || 8004;
 
 const server = app.listen(port, async () => {
   console.log(`http://${config.HOST}:` + server.address().port);
+  websocket.connect();
 });
