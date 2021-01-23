@@ -1,6 +1,6 @@
-const config = require('../utils/config');
-
 const axios = require('axios');
+
+const config = require('../utils/config');
 
 const getAccessToken = require('../twitchAPI/getAccessToken');
 
