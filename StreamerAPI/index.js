@@ -29,7 +29,7 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-const port = config.PORT || 8003;
+const port = config.PORT || 8005;
 
 const server = app.listen(port, async () => {
   console.log(`http://${config.HOST}:` + server.address().port);

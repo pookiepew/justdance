@@ -34,7 +34,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-const port = config.PORT || 8004;
+const port = config.PORT || 8006;
 
 const server = app.listen(port, async () => {
   console.log(`http://${config.HOST}:` + server.address().port);

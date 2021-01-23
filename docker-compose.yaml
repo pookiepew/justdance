@@ -13,10 +13,22 @@ services:
     env_file:
       - ./env/api_gateway.env
 
+  mongodb:
+    build: ./MongoDB
+    ports:
+      - '8003:8003'
+    networks:
+      - justdance
+    volumes:
+      - ./MongoDB:/app
+      - /app/node_modules
+    env_file:
+      - ./env/mongodb.env
+
   song_collection:
     build: ./SongCollection
     ports:
-      - '8002:8002'
+      - '8004:8004'
     networks:
       - justdance
     volumes:
@@ -28,7 +40,7 @@ services:
   streamer_api:
     build: ./StreamerAPI
     ports:
-      - '8003:8003'
+      - '8005:8005'
     networks:
       - justdance
     volumes:
@@ -40,7 +52,7 @@ services:
   twitch_auth:
     build: ./TwitchAuth
     ports:
-      - '8004:8004'
+      - '8006:8006'
     networks:
       - justdance
     volumes:
@@ -52,7 +64,7 @@ services:
   twitch_bot:
     build: ./TwitchBot
     ports:
-      - '8005:8005'
+      - '8007:8007'
     networks:
       - justdance
     volumes:
