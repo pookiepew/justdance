@@ -51,7 +51,7 @@ const updateConnectionStatus = async (req, res, next) => {
 
   if (!login || !status) {
     const error = new HttpError('Login and Status needs to be provided!', 400);
-    throw error;
+    return next(error);
   }
 
   try {
