@@ -4,11 +4,7 @@ const config = require('../utils/config');
 
 const mongoDB = require('../mongoDB/index');
 
-const getAccessToken = require('../twitchAPI/getAccessToken');
-
-const validateAccessToken = require('../twitchAPI/validateAccessToken');
-
-const getUserById = require('../twitchAPI/getUserById');
+const twitchAPI = require('../twitchAPI/index');
 
 const HttpError = require('../utils/http-error');
 
@@ -21,16 +17,24 @@ const authenticateWithTwitch = async (req, res, next) => {
   }
 
   try {
-    const { access_token, refresh_token } = await getAccessToken(
+    const { access_token, refresh_token } = await twitchAPI.getAccessToken(
       code,
       config,
       axios,
       HttpError
     );
 
-    const twitch_id = await validateAccessToken(access_token, axios, HttpError);
+    const twitch_id = await twitchAPI.validateAccessToken(
+      access_token,
+      axios,
+      HttpError
+    );
 
-    const { login, display_name, profile_image_url } = await getUserById(
+    const {
+      login,
+      display_name,
+      profile_image_url
+    } = await twitchAPI.getUserById(
       access_token,
       twitch_id,
       config,
