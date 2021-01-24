@@ -2,6 +2,8 @@ const axios = require('axios');
 
 const config = require('../utils/config');
 
+const mongoDB = require('../mongoDB/index');
+
 const getAccessToken = require('../twitchAPI/getAccessToken');
 
 const validateAccessToken = require('../twitchAPI/validateAccessToken');
@@ -36,16 +38,21 @@ const authenticateWithTwitch = async (req, res, next) => {
       HttpError
     );
 
-    // const user = await mongoDB.saveUser({
-    //   login,
-    //   twitch_id,
-    //   display_name,
-    //   profile_image_url,
-    //   refresh_token
-    // });
+    const user = await mongoDB.saveUser(
+      {
+        login,
+        twitch_id,
+        display_name,
+        profile_image_url,
+        refresh_token
+      },
+      config,
+      axios,
+      HttpError
+    );
 
     return res.json({
-      // ...user._doc,
+      ...user.data,
       access_token
     });
   } catch (error) {
@@ -56,7 +63,7 @@ const authenticateWithTwitch = async (req, res, next) => {
 // Example response to client:
 
 // {
-//   "connected": false,
+//   "shouldBeConnected": false,
 //   "_id": "600482329cc9a36b5b14bd4c",
 //   "twitch_id": "115415445",
 //   "createdAt": "2021-01-17T18:30:12.079Z",
