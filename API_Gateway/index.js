@@ -17,7 +17,9 @@ app.use(express.json());
 
 app.use('/', require('./routes/index'));
 
-app.use('/twitch', require('./routes/twitchAuth'));
+app.use('/twitch-auth', require('./routes/twitchAuth'));
+
+app.use('/twitch-bot', require('./routes/twitchBot'));
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);
@@ -29,7 +31,10 @@ app.use((error, req, res, next) => {
     return next(error);
   }
   res.status(error.code || 500);
-  res.json({ message: error.message || 'An unknown error occurred!' });
+  res.json({
+    message: error.message || 'An unknown error occurred!',
+    code: error.code || 500
+  });
 });
 
 const port = config.PORT || 8000;

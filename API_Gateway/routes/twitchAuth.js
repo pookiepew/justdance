@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/auth', (req, res, next) => res.send('Hello'));
+const twitch = require('../controllers/twitchAuth');
+
+router.get('/authenticate', twitch.authenticate);
 
 module.exports = router;

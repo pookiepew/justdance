@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => res.send('Hello'));
+const bot = require('../controllers/twitchBot');
+
+router.post('/initialize', bot.initialize);
 
 module.exports = router;
