@@ -1,9 +1,11 @@
 const express = require('express');
 
-const save = require('../controllers/user');
+const user = require('../controllers/user');
 
 const router = express.Router();
 
-router.post('/save', save);
+router.post('/save', user.save);
+
+router.get('/find', user.findByTwitchID);
 
 module.exports = router;
