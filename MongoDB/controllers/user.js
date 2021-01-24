@@ -46,4 +46,23 @@ const findByTwitchID = async (req, res, next) => {
   }
 };
 
-module.exports = { save, findByTwitchID };
+const updateConnectionStatus = async (req, res, next) => {
+  const { login, status } = req.query;
+
+  if (!login || !status) {
+    const error = new HttpError('Login and Status needs to be provided!', 400);
+    throw error;
+  }
+
+  try {
+    const user = await db.updateConnection(User, login, status, HttpError);
+    return res.json(user);
+  } catch (err) {
+    const error = new HttpError(
+      'Updating status failed, please try again',
+      500
+    );
+    return next(error);
+  }
+};
+module.exports = { save, findByTwitchID, updateConnectionStatus };

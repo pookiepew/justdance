@@ -1,4 +1,4 @@
-const saveUser = async (twitchUser, User, HttpError) => {
+module.exports = saveUser = async (twitchUser, User, HttpError) => {
   const {
     login,
     twitch_id,
@@ -28,5 +28,3 @@ const saveUser = async (twitchUser, User, HttpError) => {
     throw error;
   }
 };
-
-module.exports = saveUser;
