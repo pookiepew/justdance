@@ -46,6 +46,16 @@ const findByTwitchID = async (req, res, next) => {
   }
 };
 
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    return res.json({ users });
+  } catch (err) {
+    const error = new HttpError('Getting users failed, please try again', 500);
+    return next(error);
+  }
+};
+
 const updateConnectionStatus = async (req, res, next) => {
   const { login, status } = req.body;
 
@@ -65,4 +75,4 @@ const updateConnectionStatus = async (req, res, next) => {
     return next(error);
   }
 };
-module.exports = { save, findByTwitchID, updateConnectionStatus };
+module.exports = { save, findByTwitchID, getAllUsers, updateConnectionStatus };
