@@ -47,7 +47,7 @@ const findByTwitchID = async (req, res, next) => {
 };
 
 const updateConnectionStatus = async (req, res, next) => {
-  const { login, status } = req.query;
+  const { login, status } = req.body;
 
   if (!login || !status) {
     const error = new HttpError('Login and Status needs to be provided!', 400);

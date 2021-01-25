@@ -9,7 +9,7 @@ module.exports = updateConnection = async (User, login, status, HttpError) => {
   } catch (err) {
     const error = new HttpError(
       'Updating user with connection info failed, please try again',
-      400
+      500
     );
     throw error;
   }

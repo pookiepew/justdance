@@ -8,6 +8,6 @@ router.post('/save', user.save);
 
 router.get('/find', user.findByTwitchID);
 
-router.get('/update-status', user.updateConnectionStatus);
+router.post('/update-status', user.updateConnectionStatus);
 
 module.exports = router;
