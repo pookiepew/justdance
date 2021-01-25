@@ -1,3 +1,5 @@
+const botSocket = require('../websockets/twitchBot');
+
 const HttpError = require('../utils/http-error');
 
 const initialize = (req, res, next) => {
@@ -15,6 +17,12 @@ const initialize = (req, res, next) => {
   if (!channel) channel = login;
 
   // Websocket to TwitchBot service.
+  botSocket.getServer().emit('test', { login, access_token, channel });
+  try {
+    return res.json({ login, access_token, channel });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 module.exports = {
