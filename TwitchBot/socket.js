@@ -1,3 +1,5 @@
+const bot = require('./twitchBot/index');
+
 const ping = socket => {
   let startTime;
 
@@ -12,6 +14,14 @@ const ping = socket => {
   });
 };
 
+const listen = socket => {
+  socket.on('test', data => {
+    console.log(data);
+    bot.initializeBot(data);
+  });
+};
+
 module.exports = {
-  ping
+  ping,
+  listen
 };

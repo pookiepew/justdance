@@ -1,12 +1,14 @@
-const twitchBot = require('./index');
+const alreadyConnected = require('./alreadyConnected');
+const connect = require('./connect');
+const createClient = require('./createClient');
 
-module.exports = initializeBot = async (login, access_token, channel) => {
+module.exports = initializeBot = async ({ login, access_token, channel }) => {
   if (!login || !access_token) {
     console.log('Login and access token is required, please try again');
     return;
   }
 
-  if (twitchBot.alreadyConnected(twitchBot.clients, access_token)) {
+  if (alreadyConnected(access_token)) {
     console.log('initializeBot - Already connected - please make WS return..');
   }
 
@@ -15,7 +17,7 @@ module.exports = initializeBot = async (login, access_token, channel) => {
   try {
     const client = createClient(login, access_token, channel);
     twitchBot.clients[access_token] = client;
-    const user = await twitchBot.connect(client, login);
+    const user = await connect(client, login);
 
     return console.log(user);
   } catch (error) {

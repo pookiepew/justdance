@@ -9,6 +9,7 @@ socket.on('connect', () => {
 });
 
 connection.ping(socket);
+connection.listen(socket);
 
 socket.on('disconnect', () => {
   socket.removeAllListeners();
