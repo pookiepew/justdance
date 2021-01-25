@@ -1,17 +1,42 @@
-const io = require('socket.io-client');
+const express = require('express');
+const cors = require('cors');
+const volleyball = require('volleyball');
+const helmet = require('helmet');
 
-const connection = require('./socket');
+const websocket = require('./controllers/websocket');
 
-const socket = io('ws://api_gateway:8000', { path: '/bot' });
+const HttpError = require('./utils/http-error');
 
-socket.on('connect', () => {
-  console.log('socket.io connected');
+const config = require('./utils/config');
+
+const app = express();
+
+app.use(cors());
+app.use(volleyball);
+app.use(helmet());
+app.use(express.json());
+
+app.use('/', require('./routes/index'));
+
+app.use((req, res, next) => {
+  const error = new HttpError('Could not find this route.', 404);
+  throw error;
 });
 
-connection.ping(socket);
-connection.listen(socket);
+app.use((error, req, res, next) => {
+  if (res.headerSent) {
+    return next(error);
+  }
+  res.status(error.code || 500);
+  res.json({
+    message: error.message || 'An unknown error occurred!',
+    code: error.code || 500
+  });
+});
 
-socket.on('disconnect', () => {
-  socket.removeAllListeners();
-  console.log('Websocket disconnected!');
+const port = config.PORT || 8007;
+
+const server = app.listen(port, async () => {
+  console.log(`http://${config.HOST}:` + server.address().port);
+  websocket.connect();
 });

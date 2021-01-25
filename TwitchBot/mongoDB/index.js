@@ -1,5 +1,5 @@
-const setConnection = require('./setConnection');
+const updateConnection = require('./updateConnection');
 
 module.exports = {
-  setConnection
+  updateConnection
 };

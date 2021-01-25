@@ -3,9 +3,8 @@ const connect = require('./connect');
 const createClient = require('./createClient');
 const deleteClient = require('./deleteClient');
 const getClient = require('./getClient');
-const initializeBot = require('./initializeBot');
-
-const clients = {};
+const setClient = require('./setClient');
+const clients = require('./clients');
 
 module.exports = {
   alreadyConnected,
@@ -14,5 +13,5 @@ module.exports = {
   createClient,
   deleteClient,
   getClient,
-  initializeBot
+  setClient
 };
