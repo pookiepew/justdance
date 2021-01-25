@@ -5,6 +5,7 @@ const deleteClient = require('./deleteClient');
 const getClient = require('./getClient');
 const setClient = require('./setClient');
 const clients = require('./clients');
+const connectIfDisconnected = require('./connectIfDisconnected');
 
 module.exports = {
   alreadyConnected,
@@ -13,5 +14,6 @@ module.exports = {
   createClient,
   deleteClient,
   getClient,
-  setClient
+  setClient,
+  connectIfDisconnected
 };

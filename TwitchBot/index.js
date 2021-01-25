@@ -7,6 +7,8 @@ const websocket = require('./controllers/websocket');
 
 const HttpError = require('./utils/http-error');
 
+const bot = require('./twitchBot/index');
+
 const config = require('./utils/config');
 
 const app = express();
@@ -39,4 +41,5 @@ const port = config.PORT || 8007;
 const server = app.listen(port, async () => {
   console.log(`http://${config.HOST}:` + server.address().port);
   websocket.connect();
+  bot.connectIfDisconnected(HttpError);
 });
