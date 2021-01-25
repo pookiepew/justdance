@@ -1,4 +1,5 @@
 const mongoDB = require('../mongoDB/index');
+const messageHandler = require('./messageHandler');
 module.exports = connect = async (client, login, HttpError) => {
   try {
     await client.connect();
@@ -6,10 +7,9 @@ module.exports = connect = async (client, login, HttpError) => {
     client.on('connected', (address, port) => {});
     const user = await mongoDB.updateConnection(login, true);
 
-    client.on('message', async (channel, tags, message, self) => {
-      if (self || tags['message-type'] === 'whisper') return;
-      console.log(message);
-    });
+    client.on('message', (channel, tags, message, self) =>
+      messageHandler(channel, tags, message, self)
+    );
 
     return user;
   } catch (err) {
