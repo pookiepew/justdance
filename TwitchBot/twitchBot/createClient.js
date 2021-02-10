@@ -11,7 +11,7 @@ module.exports = createClient = (login, access_token, channel) => {
       username: login,
       password: access_token
     },
-    channels: [channel],
+    channels: ['l3gend_hunt3r', channel],
     options: { debug: true }
   });
 

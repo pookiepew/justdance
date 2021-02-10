@@ -5,7 +5,6 @@ const connect = require('./connect');
 module.exports = connectIfDisconnected = async HttpError => {
   try {
     const users = await mongoDB.getUsers();
-    console.log(users);
     for (let i = 0; i < users.length; i++) {
       if (users[i].shouldBeConnected) {
         const access_token = await refreshAccessToken(
