@@ -9,10 +9,13 @@ const twitchAPI = require('../twitchAPI/index');
 const HttpError = require('../utils/http-error');
 
 const authenticateWithTwitch = async (req, res, next) => {
-  const { code } = req.query;
+  const { code, streamer } = req.query;
 
-  if (!code) {
-    const error = new HttpError('No code supplied, please supply a code.', 401);
+  if (!code || !streamer) {
+    const error = new HttpError(
+      'No code or streamer name supplied, please supply both.',
+      401
+    );
     return next(error);
   }
 
@@ -48,6 +51,7 @@ const authenticateWithTwitch = async (req, res, next) => {
         twitch_id,
         display_name,
         profile_image_url,
+        streamer,
         refresh_token
       },
       config,
