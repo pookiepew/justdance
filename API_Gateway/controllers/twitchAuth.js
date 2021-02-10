@@ -5,7 +5,7 @@ const config = require('../utils/config');
 const HttpError = require('../utils/http-error');
 
 const authenticate = async (req, res, next) => {
-  const { code } = req.query;
+  const { code, streamer } = req.query;
 
   if (!code) {
     const error = new HttpError('Code not provided, please try again', 400);
@@ -14,7 +14,11 @@ const authenticate = async (req, res, next) => {
 
   try {
     const response = await axios.get(
-      config.TWITCH_AUTH_URL + '/authenticate?code=' + code
+      config.TWITCH_AUTH_URL +
+        '/authenticate?code=' +
+        code +
+        '&streamer=' +
+        streamer
     );
     res.json({ ...response.data });
   } catch (err) {
