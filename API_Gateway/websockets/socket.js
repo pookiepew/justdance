@@ -2,7 +2,11 @@ let io;
 
 const botSocket = {
   init: httpServer => {
-    io = require('socket.io')(httpServer);
+    io = require('socket.io')(httpServer, {
+      cors: {
+        origin: '*'
+      }
+    });
     return io;
   },
   getIO: () => {
@@ -16,6 +20,13 @@ const botSocket = {
     socket.on('TwitchBot', data => {
       console.log(data);
     });
+  },
+  ping: socket => {
+    setInterval(() => {
+      socket.emit('ping', {
+        iat: Date.now()
+      });
+    }, 10000);
   }
 };
 

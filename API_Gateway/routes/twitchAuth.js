@@ -6,4 +6,6 @@ const twitch = require('../controllers/twitchAuth');
 
 router.get('/authenticate', twitch.authenticate);
 
+router.get('/refresh-token', twitch.refreshToken);
+
 module.exports = router;
