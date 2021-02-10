@@ -40,7 +40,7 @@ Example response:
 
 ```js
 
-GET /users/find
+GET /user/find
      ?twitch_id='twitchID'
 
 Example response:
@@ -61,7 +61,7 @@ Example response:
 
 ```js
 
-POST /users/update-status
+POST /user/update-status
      {
         "login": "pooksibot",
         "status": "true"
@@ -85,7 +85,7 @@ Example response:
 
 ```js
 
-POST /users/save
+POST /user/save
      {
         "login": "pooksibot",
         "twitch_id": "444832527",
