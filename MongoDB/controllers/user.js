@@ -7,9 +7,9 @@ const db = require('../functions/index');
 const save = async (req, res, next) => {
   const twitchUser = req.body;
 
-  if (!db.userIsValid(twitchUser)) {
+  if (!twitchUser) {
     const error = new HttpError(
-      'User object missing details, please try again',
+      'A twitch user needs to be included, please try again',
       400
     );
     return next(error);
