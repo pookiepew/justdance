@@ -4,15 +4,17 @@ module.exports = saveUser = async (twitchUser, User, HttpError) => {
     twitch_id,
     display_name,
     profile_image_url,
+    streamer,
     refresh_token
   } = twitchUser;
 
   try {
-    const filter = { twitch_id };
+    const filter = { streamer, twitch_id };
     const update = {
       login,
       display_name,
       profile_image_url,
+      streamer,
       refresh_token
     };
     const user = await User.findOneAndUpdate(filter, update, {
