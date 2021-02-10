@@ -51,5 +51,6 @@ const server = app.listen(port, async () => {
       socket.id
     );
     websocket.listen(socket);
+    websocket.ping(socket);
   });
 });
