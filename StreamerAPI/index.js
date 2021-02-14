@@ -3,6 +3,8 @@ const cors = require('cors');
 const volleyball = require('volleyball');
 const helmet = require('helmet');
 
+const websocket = require('./controllers/websocket');
+
 const HttpError = require('./utils/http-error');
 
 const config = require('./utils/config');
@@ -15,6 +17,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);
@@ -33,4 +36,5 @@ const port = config.PORT || 8005;
 
 const server = app.listen(port, async () => {
   console.log(`http://${config.HOST}:` + server.address().port);
+  websocket.connect();
 });
