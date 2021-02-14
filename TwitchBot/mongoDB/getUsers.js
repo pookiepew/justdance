@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const config = require('../utils/config');
 
-module.exports = getUsers = async () => {
+module.exports = getUsers = async HttpError => {
   try {
     const {
       data: { users }

@@ -4,7 +4,7 @@ const createClient = require('./createClient');
 const connect = require('./connect');
 module.exports = connectIfDisconnected = async HttpError => {
   try {
-    const users = await mongoDB.getUsers();
+    const users = await mongoDB.getUsers(HttpError);
     for (let i = 0; i < users.length; i++) {
       if (users[i].shouldBeConnected) {
         const access_token = await refreshAccessToken(
@@ -12,7 +12,7 @@ module.exports = connectIfDisconnected = async HttpError => {
           users[i].refresh_token
         );
         console.log(access_token);
-        const client = await createClient(
+        const client = createClient(
           users[i].login,
           access_token,
           users[i].login
