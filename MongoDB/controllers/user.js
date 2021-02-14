@@ -1,8 +1,10 @@
 const User = require('../models/user');
+const Streamer = require('../models/streamer');
 
 const HttpError = require('../utils/http-error');
 
 const db = require('../functions/index');
+const { connection } = require('mongoose');
 
 const save = async (req, res, next) => {
   const twitchUser = req.body;
@@ -26,18 +28,23 @@ const save = async (req, res, next) => {
 };
 
 const findByTwitchID = async (req, res, next) => {
-  const { twitch_id } = req.query;
+  const { twitch_id, streamer } = req.query;
 
-  if (!twitch_id) {
+  if (!twitch_id || !streamer) {
     const error = new HttpError(
-      'Twitch ID was not found, please try again',
+      'Twitch ID or streamer was not found, please try again',
       401
     );
     return next(error);
   }
 
   try {
-    const user = await db.findUserByTwitchID(twitch_id, User, HttpError);
+    const user = await db.findUserByTwitchID(
+      twitch_id,
+      streamer,
+      User,
+      HttpError
+    );
 
     return res.json(user);
   } catch (err) {
@@ -53,6 +60,25 @@ const getAllUsers = async (req, res, next) => {
   } catch (err) {
     const error = new HttpError('Getting users failed, please try again', 500);
     return next(error);
+  }
+};
+
+const getAllUsersByStreamer = async (req, res, next) => {
+  const { streamer } = req.query;
+  if (!streamer) {
+    const error = new HttpError('No streamer provided, please try again', 400);
+    next(error);
+  }
+  try {
+    const connectedUsers = await db.getAllUsersByStreamer(
+      streamer,
+      Streamer,
+      HttpError
+    );
+    res.json(connectedUsers);
+  } catch (err) {
+    const error = new HttpError('Failed getting users, please try again', 500);
+    next(error);
   }
 };
 
@@ -75,4 +101,10 @@ const updateConnectionStatus = async (req, res, next) => {
     return next(error);
   }
 };
-module.exports = { save, findByTwitchID, getAllUsers, updateConnectionStatus };
+module.exports = {
+  save,
+  findByTwitchID,
+  getAllUsers,
+  updateConnectionStatus,
+  getAllUsersByStreamer
+};

@@ -1,6 +1,11 @@
-module.exports = findUserByTwitchID = async (twitch_id, User, HttpError) => {
+module.exports = findUserByTwitchID = async (
+  twitch_id,
+  streamer,
+  User,
+  HttpError
+) => {
   try {
-    const user = await User.findOne({ twitch_id });
+    const user = await User.findOne({ streamer, twitch_id });
 
     if (!user) {
       const error = new HttpError(

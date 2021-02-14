@@ -19,6 +19,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.use('/user', require('./routes/user'));
+app.use('/streamer', require('./routes/streamer'));
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);

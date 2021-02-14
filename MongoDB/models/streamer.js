@@ -89,7 +89,8 @@ const streamerSchema = new Schema(
       {
         _id: { type: Types.ObjectId },
         display_name: String,
-        profile_image_url: String
+        profile_image_url: String,
+        songMod: { type: Boolean, default: false }
       }
     ]
   },
