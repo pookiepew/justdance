@@ -1,8 +1,8 @@
-module.exports = saveUser = async (twitchUser, config, axios, HttpError) => {
+module.exports = addUserToStreamer = async (user, config, axios, HttpError) => {
   try {
     const { data } = await axios.post(
-      config.MONGO_URL + '/user/save',
-      twitchUser,
+      config.MONGO_URL + '/streamer/add-user',
+      user,
       {
         headers: { 'Content-Type': 'application/json' }
       }
@@ -10,7 +10,7 @@ module.exports = saveUser = async (twitchUser, config, axios, HttpError) => {
     return data;
   } catch (err) {
     const error = new HttpError(
-      'Saving user to database failed, please try again',
+      'Adding user to streamer failed, please try again',
       500
     );
     throw error;

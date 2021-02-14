@@ -9,11 +9,11 @@ const HttpError = require('../utils/http-error');
 const twitchAPI = require('../twitchAPI/index');
 
 const refreshTokenWithTwitch = async (req, res, next) => {
-  const { twitch_id, refresh_token } = req.query;
+  const { twitch_id, refresh_token, streamer } = req.query;
 
-  if (!twitch_id || !refresh_token) {
+  if (!twitch_id || !refresh_token || !streamer) {
     const error = new HttpError(
-      'Twitch ID or Refresh token was not found, please supply both as a query',
+      'Twitch ID, Refresh token or streamer was not found, please supply all as a queries',
       401
     );
     return next(error);
@@ -22,6 +22,7 @@ const refreshTokenWithTwitch = async (req, res, next) => {
   try {
     const user = await mongoDB.findUserByTwitchID(
       twitch_id,
+      streamer,
       config,
       axios,
       HttpError

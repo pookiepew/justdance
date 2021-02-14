@@ -59,8 +59,20 @@ const authenticateWithTwitch = async (req, res, next) => {
       HttpError
     );
 
+    await mongoDB.addUserToStreamer(
+      {
+        _id: user._id,
+        display_name,
+        profile_image_url,
+        streamer
+      },
+      config,
+      axios,
+      HttpError
+    );
+
     return res.json({
-      ...user.data,
+      user,
       access_token
     });
   } catch (error) {

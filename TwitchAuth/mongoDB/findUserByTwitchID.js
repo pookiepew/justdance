@@ -1,14 +1,19 @@
 module.exports = findUserByTwitchID = async (
   twitch_id,
+  streamer,
   config,
   axios,
   HttpError
 ) => {
   try {
-    const user = await axios.get(
-      config.MONGO_URL + '/user/find?twitch_id=' + twitch_id
+    const { data } = await axios.get(
+      config.MONGO_URL +
+        '/user/find?twitch_id=' +
+        twitch_id +
+        '&streamer=' +
+        streamer
     );
-    return user.data;
+    return data;
   } catch (err) {
     const error = new HttpError(
       'Saving user to database failed, please try again',
