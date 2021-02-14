@@ -31,20 +31,18 @@ const authenticate = async (req, res, next) => {
 };
 
 const refreshToken = async (req, res, next) => {
-  const { twitch_id, refresh_token } = req.query;
+  const { twitch_id, refresh_token, streamer } = req.query;
 
   try {
-    const { data: user } = await axios.get(
-      config.MONGODB_URL + '/user/find' + '?twitch_id=' + twitch_id
-    );
-
     const response = await axios.get(
       config.TWITCH_AUTH_URL +
         '/refresh-token' +
         '?twitch_id=' +
         twitch_id +
         '&refresh_token=' +
-        refresh_token
+        refresh_token +
+        '&streamer=' +
+        streamer
     );
     res.json({ ...response.data });
   } catch (err) {

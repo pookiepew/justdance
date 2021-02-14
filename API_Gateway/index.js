@@ -22,6 +22,8 @@ app.use('/twitch-auth', require('./routes/twitchAuth'));
 
 app.use('/twitch-bot', require('./routes/twitchBot'));
 
+app.use('/streamer', require('./routes/streamerAPI'));
+
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);
   throw error;

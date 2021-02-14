@@ -2,6 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => res.send('Hello'));
+const streamer = require('../controllers/streamerAPI');
+
+router.get('/', streamer.getStreamerData);
+
+router.get('/users', streamer.getAllUsers);
 
 module.exports = router;
