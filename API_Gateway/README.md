@@ -77,3 +77,133 @@ Example response:
 }
 
 ```
+
+```js
+
+GET /streamer/users
+    ?streamer='STREAMER'
+
+Example response:
+
+[
+  {
+    shouldBeConnected: false,
+    _id: '6028480b963275a423520bf9',
+    streamer: 'pookiepew',
+    createdAt: '2021-02-10T19:07:11.661Z',
+    display_name: 'pooksibot',
+    login: 'pooksibot',
+    profile_image_url: 'https://static-cdn.jtvnw.net/user-default-pictures-uv/de130ab0-def7-11e9-b668-784f43822e80-profile_image-300x300.png',
+    updatedAt: '2021-02-13T21:48:02.630Z'
+  },
+  {
+    shouldBeConnected: false,
+    _id: '6028480b963275a423520bf9',
+    streamer: 'pookiepew',
+    createdAt: '2021-02-13T21:43:41.122Z',
+    display_name: 'pooksibot',
+    login: 'pooksibot',
+    profile_image_url: 'https://static-cdn.jtvnw.net/user-default-pictures-uv/de130ab0-def7-11e9-b668-784f43822e80-profile_image-300x300.png',
+    updatedAt: '2021-02-13T21:43:41.122Z'
+  }
+]
+
+```
+
+```js
+
+GET /streamer
+    ?streamer='STREAMER'
+
+Example response:
+
+{
+  "twitchChat": {
+    "isQueueOpen": false,
+    "songRequestMessage": "/me is requesting @pookiepew to dance ",
+    "leaveQueueMessage": "/me ripped a song out of the queue! NotLikeThis The song was ",
+    "openQueueMessage": "/me is letting everyone know that queue is now open! Songs can be requested at https://www.",
+    "closeQueueMessage": "HeyGuys Queue is now closed! Better luck next time SeemsGood"
+  },
+  "_id": "5fb9be05dc177f004a8b1d87",
+  "streamer": "pookiepew",
+  "activeSongs": [
+    {
+      "_id": "5fb1a44827e6bf00d2ff9d45",
+      "artist": "2 Unlimited",
+      "year": "1993",
+      "mode": "Duet",
+      "imageName": "Nolimit.jpg",
+      "game": "Unlimited",
+      "routine": "Classic"
+    }
+  ],
+  "favoriteSongs": [
+    {
+      "_id": "5fb1a44827e6bf00d2ff9d45",
+      "artist": "2 Unlimited",
+      "year": "1993",
+      "mode": "Duet",
+      "imageName": "Nolimit.jpg",
+      "game": "Unlimited",
+      "routine": "Classic"
+    }
+  ],
+  "learningSongs": [
+    {
+      "_id": "5fb1a44827e6bf00d2ff9d45",
+      "artist": "2 Unlimited",
+      "year": "1993",
+      "mode": "Duet",
+      "imageName": "Nolimit.jpg",
+      "game": "Unlimited",
+      "routine": "Classic"
+    }
+  ],
+  "bannedSongs": [
+    {
+      "_id": "5fb1a44827e6bf00d2ff9d45",
+      "artist": "2 Unlimited",
+      "year": "1993",
+      "mode": "Duet",
+      "imageName": "Nolimit.jpg",
+      "game": "Unlimited",
+      "routine": "Classic"
+    }
+  ],
+  "queue": [
+    {
+      "_id": "5fb1a44827e6bf00d2ff9d45",
+      "artist": "2 Unlimited",
+      "year": "1993",
+      "mode": "Duet",
+      "imageName": "Nolimit.jpg",
+      "game": "Unlimited",
+      "routine": "Classic"
+    }
+  ],
+  "dancedToday": [
+    {
+      "_id": "5fb1a44827e6bf00d2ff9d45",
+      "artist": "2 Unlimited",
+      "year": "1993",
+      "mode": "Duet",
+      "imageName": "Nolimit.jpg",
+      "game": "Unlimited",
+      "routine": "Classic"
+    }
+  ],
+  "createdAt": "2020-11-22T01:25:25.628Z",
+  "updatedAt": "2020-11-22T01:25:52.019Z",
+  "__v": 1,
+  "connectedUsers": [
+    {
+      "_id": "5fb1a44827e6bf00d2ff9d45",
+      "display_name": 'pooksibot',
+      "profile_image_url": 'https://static-cdn.jtvnw.net/user-default-pictures-uv/de130ab0-def7-11e9-b668-784f43822e80-profile_image-300x300.png',
+      "songMod": "true"
+    }
+  ]
+}
+
+```
