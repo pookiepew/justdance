@@ -1,4 +1,4 @@
-const { model, Schema } = require('mongoose');
+const { model, Schema, Types } = require('mongoose');
 
 const requiredString = { type: String, required: true };
 
@@ -9,8 +9,7 @@ const userSchema = new Schema(
     display_name: requiredString,
     profile_image_url: requiredString,
     refresh_token: requiredString,
-    streamer: requiredString,
-    shouldBeConnected: { type: Boolean, default: false }
+    streamer: { type: Types.ObjectId, ref: 'Streamer' }
   },
   {
     versionKey: false,

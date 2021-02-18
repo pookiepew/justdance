@@ -1,4 +1,4 @@
-const Streamer = require('../models/streamer');
+const Streamer = require('../models/Streamer');
 
 const HttpError = require('../utils/http-error');
 

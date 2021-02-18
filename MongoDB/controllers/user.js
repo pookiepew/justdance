@@ -1,10 +1,9 @@
-const User = require('../models/user');
-const Streamer = require('../models/streamer');
+const User = require('../models/User');
+const Streamer = require('../models/Streamer');
 
 const HttpError = require('../utils/http-error');
 
 const db = require('../functions/index');
-const { connection } = require('mongoose');
 
 const save = async (req, res, next) => {
   const twitchUser = req.body;
