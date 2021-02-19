@@ -1,8 +1,4 @@
-const mongoose = require('mongoose');
-
-const config = require('./utils/config');
-
-const connect = async () => {
+module.exports = connect = async (mongoose, config) => {
   const dbUser = config.MONGO_USER;
   const dbPW = config.MONGO_PASS;
   const dbIP = config.MONGO_IP;
@@ -16,7 +12,7 @@ const connect = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
-        useFindAndModify: false
+        useFindAndModify: false,
       }
     );
 
@@ -26,5 +22,3 @@ const connect = async () => {
     process.exit(1);
   }
 };
-
-module.exports = { connect };

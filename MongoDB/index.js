@@ -2,10 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const volleyball = require('volleyball');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
 
 const websocket = require('./controllers/websocket');
 
-const mongoDB = require('./mongoDB');
+const db = require('./db/index');
 
 const HttpError = require('./utils/http-error');
 
@@ -33,7 +34,7 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500);
   res.json({
     message: error.message || 'An unknown error occurred!',
-    code: error.code || 500
+    code: error.code || 500,
   });
 });
 
@@ -42,5 +43,5 @@ const port = config.PORT || 8003;
 const server = app.listen(port, async () => {
   console.log(`http://${config.HOST}:` + server.address().port);
   websocket.connect();
-  await mongoDB.connect();
+  await db.connect(mongoose, config);
 });

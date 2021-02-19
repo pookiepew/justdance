@@ -6,6 +6,4 @@ const router = express.Router();
 
 router.get('/get', streamer.getStreamer);
 
-router.post('/add-user', streamer.addUser);
-
 module.exports = router;

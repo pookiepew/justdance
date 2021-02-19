@@ -2,7 +2,7 @@ const Streamer = require('../models/Streamer');
 
 const HttpError = require('../utils/http-error');
 
-const db = require('../functions/index');
+const db = require('../db/index');
 
 const getStreamer = async (req, res, next) => {
   const { streamer } = req.query;
@@ -23,25 +23,6 @@ const getStreamer = async (req, res, next) => {
   }
 };
 
-const addUser = async (req, res, next) => {
-  const user = req.body;
-  if (!user) {
-    const error = new HttpError('User was not provided, please try again', 400);
-    return next(error);
-  }
-  try {
-    const data = await db.addUserToStreamer(user, Streamer, HttpError);
-    res.json(data);
-  } catch (err) {
-    const error = new HttpError(
-      'Adding user to streamer failed, please try again',
-      500
-    );
-    next(error);
-  }
-};
-
 module.exports = {
   getStreamer,
-  addUser
 };
