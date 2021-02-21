@@ -1,0 +1,19 @@
+@API_Gateway = http://localhost:8000
+
+POST {{API_Gateway}}/streamer/create HTTP/1.1
+content-type: application/json
+
+{
+  "login": "pookiepew",
+  "refresh_token": "k3j45kl34j54lk3j"
+}
+
+###
+
+GET {{API_Gateway}}/streamer?login=pookiepew
+
+
+###
+
+GET {{API_Gateway}}/streamer/users?streamer=pookiepew
+

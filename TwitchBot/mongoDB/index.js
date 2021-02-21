@@ -1,7 +1,7 @@
 const updateConnection = require('./updateConnection');
-const getUsers = require('./getUsers');
+const getStreamers = require('./getStreamers');
 
 module.exports = {
   updateConnection,
-  getUsers
+  getStreamers
 };

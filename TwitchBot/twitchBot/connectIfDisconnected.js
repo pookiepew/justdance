@@ -4,23 +4,17 @@ const createClient = require('./createClient');
 const connect = require('./connect');
 module.exports = connectIfDisconnected = async HttpError => {
   try {
-    const users = await mongoDB.getUsers(HttpError);
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].shouldBeConnected) {
-        const access_token = await refreshAccessToken(
-          users[i].twitch_id,
-          users[i].refresh_token
-        );
-        console.log(access_token);
-        const client = createClient(
-          users[i].login,
-          access_token,
-          users[i].login
-        );
-        await connect(client, users[i].login, HttpError);
-      }
+    const streamers = await mongoDB.getStreamers(HttpError);
+    for (let i = 0; i < streamers.length; i++) {
+      const access_token = await refreshAccessToken(streamers[i].refresh_token);
+      const client = await createClient(
+        streamers[i].login,
+        access_token,
+        streamers[i].login
+      );
+      await connect(client, streamers[i].login, HttpError);
     }
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };

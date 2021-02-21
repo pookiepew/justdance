@@ -1,4 +1,3 @@
-const mongoDB = require('../mongoDB/index');
 const messageHandler = require('./messageHandler');
 module.exports = connect = async (client, login, HttpError) => {
   try {
@@ -7,8 +6,6 @@ module.exports = connect = async (client, login, HttpError) => {
     client.on('connected', (address, port) => {
       console.log('CONNNNNNNNNNNN');
     });
-
-    const user = await mongoDB.updateConnection(login, true);
 
     client.on(
       'message',
@@ -24,7 +21,7 @@ module.exports = connect = async (client, login, HttpError) => {
       console.log(channel, userstate, message);
     });
 
-    return user;
+    return login;
   } catch (err) {
     const error = new HttpError(err + '. access_token is not valid', 401);
     throw error;

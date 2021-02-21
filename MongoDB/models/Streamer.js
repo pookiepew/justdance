@@ -4,17 +4,24 @@ const streamerSchema = new Schema(
   {
     login: { type: String },
 
-    activeSongs: [{ type: Types.ObjectId, ref: 'Song' }],
+    songs: [
+      {
+        list: { type: String, required: true },
+        _id: { type: Types.ObjectId, ref: 'Song' }
+      }
+    ],
 
-    favoriteSongs: [{ type: Types.ObjectId, ref: 'Song' }],
+    // activeSongs: [{ type: Types.ObjectId, ref: 'Song' }],
 
-    learningSongs: [{ type: Types.ObjectId, ref: 'Song' }],
+    // favoriteSongs: [{ type: Types.ObjectId, ref: 'Song' }],
 
-    bannedSongs: [{ type: Types.ObjectId, ref: 'Song' }],
+    // learningSongs: [{ type: Types.ObjectId, ref: 'Song' }],
 
-    queue: [{ type: Types.ObjectId, ref: 'Song' }],
+    // bannedSongs: [{ type: Types.ObjectId, ref: 'Song' }],
 
-    dancedToday: [{ type: Types.ObjectId, ref: 'Song' }],
+    // queue: [{ type: Types.ObjectId, ref: 'Song' }],
+
+    // dancedToday: [{ type: Types.ObjectId, ref: 'Song' }],
 
     twitchChat: {
       isQueueOpen: Boolean,
@@ -24,7 +31,8 @@ const streamerSchema = new Schema(
       closeQueueMessage: String
     },
 
-    connectedUsers: [{ type: Types.ObjectId, ref: 'User' }]
+    users: [{ type: Types.ObjectId, ref: 'User' }],
+    refresh_token: String
   },
   {
     versionKey: false,

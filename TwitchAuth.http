@@ -1,0 +1,3 @@
+@TwitchAuth = http://localhost:8006
+
+GET {{TwitchAuth}}/refresh-streamer-token?refresh_token=m4jbi7v1mq727s7eyagtex0p1b52sm9ek35g4ovurv6tj0362b

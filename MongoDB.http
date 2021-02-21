@@ -1,0 +1,23 @@
+@MongoDB = http://localhost:8003
+
+GET {{MongoDB}}/streamer/get?login=pookiepew
+
+
+###
+
+GET {{MongoDB}}/streamer/get-all
+
+###
+
+GET {{MongoDB}}/streamer/get-refresh_token?login=pookiepew
+
+
+###
+
+POST {{MongoDB}}/streamer/adduser HTTP/1.1
+content-type: application/json
+
+{
+  "login": "pookiepew",
+  "_id": "60295eec963275a423579545"
+}

@@ -36,4 +36,4 @@ It will also hold a websocket connection to both client and services. Client wil
 - Running commands in chat. I.E !uptime !dance etc directly from website
 - More to be added...
 
-# Author: [pookiepew](https://www.twitch.tv/pookiepew)
+### Author: [pookiepew](https://www.twitch.tv/pookiepew)

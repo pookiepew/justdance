@@ -1,0 +1,23 @@
+@SongCollection = http://localhost:8004
+
+GET {{SongCollection}}/streamer/get?login=pookiepew
+
+
+###
+
+GET {{SongCollection}}/streamer/get-all
+
+###
+
+GET {{SongCollection}}/streamer/get-refresh_token?login=pookiepew
+
+
+###
+
+POST {{SongCollection}}/streamer/adduser HTTP/1.1
+content-type: application/json
+
+{
+  "login": "pookiepew",
+  "_id": "60295eec963275a423579545"
+}

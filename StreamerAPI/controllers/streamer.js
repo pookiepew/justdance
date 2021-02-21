@@ -4,10 +4,30 @@ const config = require('../utils/config');
 
 const HttpError = require('../utils/http-error');
 
-const getStreamerData = async (req, res, next) => {
-  const { streamer } = req.query;
+const createNewStreamer = async (req, res, next) => {
+  const { login, refresh_token } = req.body;
+  if (!login || !refresh_token) {
+    const error = new HttpError('Streamer login or refresh token missing', 400);
+    return next(error);
+  }
+  try {
+    const { data } = await axios.post(
+      config.MONGODB_SERVICE_URL + '/streamer/create',
+      { login, refresh_token },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+    res.status(201).json(data);
+  } catch (err) {
+    next(err);
+  }
+};
 
-  if (!streamer) {
+const getStreamerData = async (req, res, next) => {
+  const { login } = req.query;
+
+  if (!login) {
     const error = new HttpError(
       'No streamer provided, please provide one',
       400
@@ -17,7 +37,7 @@ const getStreamerData = async (req, res, next) => {
 
   try {
     const { data } = await axios.get(
-      config.MONGODB_SERVICE_URL + '/streamer/get?streamer=' + streamer
+      config.MONGODB_SERVICE_URL + '/streamer/get?login=' + login
     );
     res.json(data);
   } catch (err) {
@@ -30,5 +50,6 @@ const getStreamerData = async (req, res, next) => {
 };
 
 module.exports = {
+  createNewStreamer,
   getStreamerData
 };

@@ -1,20 +1,17 @@
-module.exports = getStreamerData = async (streamer, Streamer) => {
-  if (!streamer) throw new Error('No streamer provided');
+module.exports = getStreamerData = async (login, Streamer) => {
+  if (!login) throw new Error('No streamer login provided');
   try {
-    const data = await Streamer.findOne({ streamer })
+    const streamer = await Streamer.findOne({ login })
+      .select('-refresh_token')
       .populate({
-        path: 'activeSongs'
-      })
-      .populate({ path: 'favoriteSongs' })
-      .populate({ path: 'learningSongs' })
-      .populate({ path: 'bannedSongs' })
-      .populate({ path: 'queue' })
-      .populate({ path: 'dancedToday' })
-      .populate({
-        path: 'connectedUsers',
+        path: 'users',
         select: 'display_name profile_image_url'
+      })
+      .populate({
+        path: 'songs'
       });
-    return data;
+
+    return streamer;
   } catch (err) {
     throw new Error('Failed getting streamer, please try again');
   }
