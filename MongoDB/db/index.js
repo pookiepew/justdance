@@ -4,6 +4,7 @@ const createNewStreamer = require('./createNewStreamer');
 const findStreamer = require('./findStreamer');
 const addUserToStreamer = require('./addUserToStreamer');
 const findStreamerRefreshToken = require('./findStreamerRefreshToken');
+const addSongToStreamer = require('./addSongToStreamer');
 
 const findUserByTwitchID = require('./findUserByTwitchID');
 const saveUser = require('./saveUser');
@@ -18,6 +19,7 @@ module.exports = {
   findStreamer,
   addUserToStreamer,
   findStreamerRefreshToken,
+  addSongToStreamer,
   findUserByTwitchID,
   saveUser,
   updateConnection,

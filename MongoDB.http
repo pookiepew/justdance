@@ -21,3 +21,18 @@ content-type: application/json
   "login": "pookiepew",
   "_id": "60295eec963275a423579545"
 }
+
+###
+
+GET {{MongoDB}}/song
+
+###
+
+POST {{MongoDB}}/streamer/add-song HTTP/1.1
+content-type: application/json
+
+{
+  "streamer": "pookiepew",
+  "list": "requestable",
+  "songId": "5fb1a44827e6bf00d2ff9d1c"
+}

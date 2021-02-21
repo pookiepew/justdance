@@ -92,10 +92,22 @@ const getAllStreamers = async (req, res, next) => {
   }
 };
 
+const addSong = async (req, res, next) => {
+  const { streamer, list, songId } = req.body;
+
+  try {
+    const data = await db.addSongToStreamer(streamer, list, songId, Streamer);
+    res.json({ data });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createStreamer,
   getStreamer,
   addUser,
   getRefreshToken,
-  getAllStreamers
+  getAllStreamers,
+  addSong
 };

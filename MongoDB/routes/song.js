@@ -1,8 +1,8 @@
 const express = require('express');
 
-const router = express.Router();
-
 const song = require('../controllers/song');
+
+const router = express.Router();
 
 router.get('/', song.getAll);
 

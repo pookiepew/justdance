@@ -11,18 +11,6 @@ const streamerSchema = new Schema(
       }
     ],
 
-    // activeSongs: [{ type: Types.ObjectId, ref: 'Song' }],
-
-    // favoriteSongs: [{ type: Types.ObjectId, ref: 'Song' }],
-
-    // learningSongs: [{ type: Types.ObjectId, ref: 'Song' }],
-
-    // bannedSongs: [{ type: Types.ObjectId, ref: 'Song' }],
-
-    // queue: [{ type: Types.ObjectId, ref: 'Song' }],
-
-    // dancedToday: [{ type: Types.ObjectId, ref: 'Song' }],
-
     twitchChat: {
       isQueueOpen: Boolean,
       songRequestMessage: String,

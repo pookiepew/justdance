@@ -1,6 +1,6 @@
 @SongCollection = http://localhost:8004
 
-GET {{SongCollection}}/streamer/get?login=pookiepew
+GET {{SongCollection}}/
 
 
 ###
