@@ -6,9 +6,9 @@ const streamerSchema = new Schema(
 
     songs: [
       {
+        _id: { type: Types.ObjectId, ref: 'Song' },
         list: { type: String, required: true },
-        _id: { type: Types.ObjectId, ref: 'Song' }
-      }
+      },
     ],
 
     twitchChat: {
@@ -16,15 +16,15 @@ const streamerSchema = new Schema(
       songRequestMessage: String,
       leaveQueueMessage: String,
       openQueueMessage: String,
-      closeQueueMessage: String
+      closeQueueMessage: String,
     },
 
     users: [{ type: Types.ObjectId, ref: 'User' }],
-    refresh_token: String
+    refresh_token: String,
   },
   {
     versionKey: false,
-    timestamps: true
+    timestamps: true,
   }
 );
 

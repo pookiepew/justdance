@@ -5,10 +5,11 @@ module.exports = getStreamerData = async (login, Streamer) => {
       .select('-refresh_token')
       .populate({
         path: 'users',
-        select: 'display_name profile_image_url'
+        select: 'display_name profile_image_url',
       })
       .populate({
-        path: 'songs'
+        path: 'songs',
+        populate: '_id',
       });
 
     return streamer;
