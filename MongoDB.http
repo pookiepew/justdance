@@ -36,3 +36,7 @@ content-type: application/json
   "list": "requestable",
   "songId": "5fb1a44827e6bf00d2ff9dfd"
 }
+
+###
+
+GET {{MongoDB}}/streamer/get-songlist?streamer=pookiepew&list=banned

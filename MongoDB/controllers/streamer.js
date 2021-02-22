@@ -103,11 +103,33 @@ const addSong = async (req, res, next) => {
   }
 };
 
+const getSongList = async (req, res, next) => {
+  const { streamer, list } = req.query;
+  if (!streamer || !list) {
+    const error = new HttpError('Streamer or list not provided', 400);
+    return next(error);
+  }
+  try {
+    const songlist = await db.getStreamerSonglist(streamer, list, Streamer);
+    if (songlist.length === 0) {
+      const error = new HttpError(
+        'Songlist does not exist or songs not added yet',
+        400
+      );
+      return next(error);
+    }
+    res.json(songlist);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createStreamer,
   getStreamer,
   addUser,
   getRefreshToken,
   getAllStreamers,
-  addSong
+  addSong,
+  getSongList,
 };

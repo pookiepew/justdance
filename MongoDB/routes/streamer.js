@@ -16,4 +16,6 @@ router.get('/get-refresh_token', streamer.getRefreshToken);
 
 router.post('/add-song', streamer.addSong);
 
+router.get('/get-songlist', streamer.getSongList);
+
 module.exports = router;
