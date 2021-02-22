@@ -93,32 +93,57 @@ const getAllStreamers = async (req, res, next) => {
 };
 
 const addSong = async (req, res, next) => {
-  const { streamer, list, songId } = req.body;
+  const { streamer, title, songId } = req.body;
 
   try {
-    const data = await db.addSongToStreamer(streamer, list, songId, Streamer);
-    res.json({ data });
+    const data = await db.addSongToSonglist(streamer, title, songId, Streamer);
+    res.status(201).json({ data });
   } catch (err) {
     next(err);
   }
 };
 
 const getSongList = async (req, res, next) => {
-  const { streamer, list } = req.query;
-  if (!streamer || !list) {
-    const error = new HttpError('Streamer or list not provided', 400);
+  const { streamer, title } = req.query;
+  if (!streamer) {
+    const error = new HttpError('Streamer not provided', 400);
     return next(error);
   }
   try {
-    const songlist = await db.getStreamerSonglist(streamer, list, Streamer);
+    const songlist = await db.getStreamerSonglist(streamer, title, Streamer);
     if (songlist.length === 0) {
       const error = new HttpError(
         'Songlist does not exist or songs not added yet',
-        400
+        200
       );
       return next(error);
     }
-    res.json(songlist);
+    res.json({ songlist });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const removeSongFromList = async (req, res, next) => {
+  const { streamer, title, songId } = req.body;
+  try {
+    const songlists = await db.removeSongFromList(
+      streamer,
+      title,
+      songId,
+      Streamer
+    );
+    res.json(songlists);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getSonglistTitles = async (req, res, next) => {
+  const { streamer } = req.query;
+  try {
+    const titles = await db.getSonglistTitles(streamer, Streamer);
+    res.json({ titles });
   } catch (err) {
     next(err);
   }
@@ -132,4 +157,6 @@ module.exports = {
   getAllStreamers,
   addSong,
   getSongList,
+  removeSongFromList,
+  getSonglistTitles,
 };

@@ -1,12 +1,17 @@
-module.exports = getStreamerSongList = async (login, list, Streamer) => {
-  if (!login || !list) throw new Error('Streamer or list no provided');
+module.exports = getStreamerSongList = async (login, title, Streamer) => {
+  if (!login) throw new Error('Streamer not provided');
   try {
     const streamer = await Streamer.findOne({ login }).populate({
-      path: 'songs',
-      populate: '_id',
+      path: 'songlists',
+      populate: 'songs',
     });
-    const songlist = streamer.songs.filter((song) => song.list === list);
-    return songlist;
+    if (title) {
+      const songlist = streamer.songlists.filter(
+        (song) => song.title === title
+      );
+      return songlist;
+    }
+    return streamer.songlists;
   } catch (err) {
     throw err;
   }

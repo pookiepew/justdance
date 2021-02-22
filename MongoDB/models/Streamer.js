@@ -4,10 +4,10 @@ const streamerSchema = new Schema(
   {
     login: { type: String },
 
-    songs: [
+    songlists: [
       {
-        _id: { type: Types.ObjectId, ref: 'Song' },
-        list: { type: String, required: true },
+        title: { type: String, required: true },
+        songs: [{ type: Types.ObjectId, ref: 'Song' }],
       },
     ],
 

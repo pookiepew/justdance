@@ -16,6 +16,10 @@ router.get('/get-refresh_token', streamer.getRefreshToken);
 
 router.post('/add-song', streamer.addSong);
 
+router.post('/remove-song', streamer.removeSongFromList);
+
 router.get('/get-songlist', streamer.getSongList);
+
+router.get('/get-songlist-titles', streamer.getSonglistTitles);
 
 module.exports = router;

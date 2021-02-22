@@ -8,8 +8,8 @@ module.exports = getStreamerData = async (login, Streamer) => {
         select: 'display_name profile_image_url',
       })
       .populate({
-        path: 'songs',
-        populate: '_id',
+        path: 'songlists',
+        populate: 'songs',
       });
 
     return streamer;
